@@ -1,5 +1,5 @@
-# McAdapter [![](https://img.shields.io/badge/JitPack-1.0.2-blue.svg)](https://jitpack.io/#GitSmark/ActionSheet)
-An Android IOS style actionsheet.
+# ActionSheet [![](https://img.shields.io/badge/JitPack-1.0.2-blue.svg)](https://jitpack.io/#GitSmark/ActionSheet)
+An Android IOS style ActionSheet.
 
  ![IOS STYLE](demo/ActionSheetIosStyle.png)
  
@@ -19,7 +19,7 @@ Usage
   ```
   implementation 'com.github.GitSmark:ActionSheet:1.0.2'
   ```
-* Set the ActionSheetStyle
+* Set the ActionSheet style
  ```java
   actionSheet = new ActionSheet.DialogBuilder(this)
       //.setTheme(ActionSheet.ActionSheetMetiralStyle)
@@ -44,7 +44,7 @@ Usage
   //actionSheet.setCancelable(false);
   actionSheet.show();
  ```
-* Closed the Dialog
+* Closed the ActionSheet
  ```java
   actionSheet.dismiss();
   //actionSheet.hide();

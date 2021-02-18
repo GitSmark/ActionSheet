@@ -114,13 +114,6 @@ public class ActionSheet extends Dialog {
         parentLayout.setBackgroundColor(Color.parseColor((sheetStyle == ActionSheetMetiralStyle)? "#F0EFF4": "#00ffffff"));
         parentLayout.setOrientation(LinearLayout.VERTICAL);
 
-        //fix只有一个选择项时宽度不会占满整个屏幕
-        if (sheetTextList != null && sheetTextList.size() < 2) {
-            View spaceDividerLine = new View(context);
-            spaceDividerLine.setBackgroundColor(Color.parseColor("#00000000"));
-            parentLayout.addView(spaceDividerLine, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        }
-
         if (title != null) {
             titleTextView = new TextView(context);
             titleTextView.setGravity(Gravity.CENTER);
@@ -135,6 +128,11 @@ public class ActionSheet extends Dialog {
             LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, titleHeight);
             parentLayout.addView(titleTextView, titleLayoutParams);
+        } else //fix只有一个选择项时宽度不会占满整个屏幕
+        if (sheetTextList != null && sheetTextList.size() < 2) {
+            View spaceDividerLine = new View(context);
+            spaceDividerLine.setBackgroundColor(Color.parseColor("#00000000"));
+            parentLayout.addView(spaceDividerLine, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
         }
         for (int i = 0; i < sheetTextList.size(); i++) {
             if (i == 0 && title != null) {
@@ -206,7 +204,16 @@ public class ActionSheet extends Dialog {
         } else {
             cancelButton.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dialog_white_selector));
         }
-        cancelButton.setOnClickListener(cancelListener);
+        if (cancelListener != null) {
+           cancelButton.setOnClickListener(cancelListener);
+        } else {
+           cancelButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   dismiss();
+               }
+           });
+        }
         LinearLayout.LayoutParams cancelParams = new LinearLayout.LayoutParams
                 (ViewGroup.LayoutParams.MATCH_PARENT, cancelHeight);
         cancelParams.setMargins(0, dp2px(10), 0, 0);
